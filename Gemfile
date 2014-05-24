@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
+gem 'camping'
+gem 'sqlite3'
+gem 'activerecord', '~>3.0.20'
 gem 'acts_as_versioned'
 gem 'RedCloth'
