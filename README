@@ -1,0 +1,235 @@
+If you've got camping installed, why not run all these examples using TheCampingServer?
+
+From this directory, run: `camping .`
+
+NOTE: You'll need the active_record and acts_as_versioned gems installed.
+
+Currently this example fails with the following trace:
+
+```
+ActiveRecord::RecordNotFound at /
+Couldn't find Blog::Models::SchemaInfo with 'id'=first
+
+Ruby/Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/relation/finder_methods.rb:
+in raise_record_not_found_exception!, line 320
+WebGET 127.0.0.1/
+Jump to:
+GETPOSTCookiesENV
+Traceback (innermost first)
+
+    /Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/relation/finder_methods.rb:
+    in raise_record_not_found_exception!
+          raise RecordNotFound, error...
+	  /Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/relation/finder_methods.rb:
+	  in find_one
+	        raise_record_not_found_exception!(id, 0, 1) unless record...
+		/Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/relation/finder_methods.rb:
+		in find_with_ids
+		        result = find_one(ids.first)...
+			/Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/relation/finder_methods.rb:
+			in find
+			        find_with_ids(*args)...
+				/Users/xxxxx/.rvm/gems/ruby-head/gems/activerecord-4.1.1/lib/active_record/querying.rb:
+				in find
+				    delegate :find, :take, :take!, :first,
+				    :first!, :last, :last!, :exists?, :any?,
+				    :many?, to: :all...
+				    <main>: in create_schema
+				    blog.rb: in create
+				      Blog::Models.create_schema :assume =>
+				      (Blog::Models::Post.table_exists? ? 1.0 :
+				       0.0)...
+				      /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+				      in block in load_apps
+				                app.create if
+						app.respond_to?(:create)...
+						/Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+						in each
+						      @apps =
+						      new_apps.inject({}) do
+						      |hash, app|...
+						      /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+						      in inject
+						            @apps =
+							    new_apps.inject({})
+    do |hash, app|...
+    /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+    in load_apps
+          @apps = new_apps.inject({}) do |hash, app|...
+	  /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+	  in reload!
+	        load_apps(remove_apps)...
+		/Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/reloader.rb:
+		in reload
+		      reload!...
+		      /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/server.rb:
+		      in current_app
+		            @reloader.reload...
+			    /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/server.rb:
+			    in call
+			          app = current_app || raise("Could not find an
+					  app called `#{@reloader.name}`")...
+				  /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/cascade.rb:
+				  in block in call
+				          result = app.call(env)...
+					  /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/cascade.rb:
+					  in each
+					        @apps.each do |app|...
+						/Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/cascade.rb:
+						in call
+						      @apps.each do |app|...
+						      /Users/xxxxx/.rvm/gems/ruby-head/gems/camping-2.1.532/lib/camping/server.rb:
+						      in call
+						              status, headers,
+							      body =
+							      @app.call(env)...
+							      /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/lint.rb:
+							      in _call
+							            status,
+								    headers,
+								    @body =
+								    @app.call(env)...
+								    /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/lint.rb:
+								    in call
+								          dup._call(env)...
+									  /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/showexceptions.rb:
+									  in
+									  call
+									        @app.call(env)...
+										/Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/commonlogger.rb:
+										in
+										call
+										      status,
+										      header,
+										      body
+										      =
+										      @app.call(env)...
+										      /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/chunked.rb:
+										      in
+										      call
+										            status,
+											    headers,
+											    body
+											    =
+											    @app.call(env)...
+											    /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/content_length.rb:
+											    in
+											    call
+											          status,
+												  headers,
+												  body
+												  =
+												  @app.call(env)...
+												  /Users/xxxxx/.rvm/gems/ruby-head/gems/rack-1.5.2/lib/rack/handler/webrick.rb:
+												  in
+												  service
+												          status,
+													  headers,
+													  body
+													  =
+													  @app.call(env)...
+													  /Users/xxxxx/.rvm/rubies/ruby-head/lib/ruby/2.1.0/webrick/httpserver.rb:
+													  in
+													  service
+													        si.service(req,
+															res)...
+														/Users/xxxxx/.rvm/rubies/ruby-head/lib/ruby/2.1.0/webrick/httpserver.rb:
+														in
+														run
+														          server.service(req,
+																  res)...
+															  /Users/xxxxx/.rvm/rubies/ruby-head/lib/ruby/2.1.0/webrick/server.rb:
+															  in
+															  block
+															  in
+															  start_thread
+															            block
+																    ?
+																    block.call(sock)
+    : run(sock)...
+    Request information
+
+    GET
+    No GET data.
+    POST
+    No POST data.
+    COOKIES
+    No cookie data.
+    Rack ENV
+    VariableValue
+    GATEWAY_INTERFACE
+    CGI/1.1
+    HTTP_ACCEPT
+    text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+									HTTP_ACCEPT_ENCODING
+									gzip,deflate,sdch
+									HTTP_ACCEPT_LANGUAGE
+									en-US,en;q=0.8
+									HTTP_CONNECTION
+									keep-alive
+									HTTP_DNT
+									1
+									HTTP_HOST
+									127.0.0.1:3301
+									HTTP_USER_AGENT
+									Mozilla/5.0
+									(Macintosh;
+									Intel
+									Mac OS X
+									10_9_2)
+									AppleWebKit/537.36
+									(KHTML,
+									like
+									Gecko)
+									Chrome/35.0.1916.114
+									Safari/537.36
+									HTTP_VERSION
+									HTTP/1.1
+									PATH_INFO
+									/
+									QUERY_STRING
+									REMOTE_ADDR
+									127.0.0.1
+									REMOTE_HOST
+									localhost
+									REQUEST_METHOD
+									GET
+									REQUEST_PATH
+									/
+									REQUEST_URI
+									http://127.0.0.1:3301/
+									SCRIPT_NAME
+									SERVER_NAME
+									127.0.0.1
+									SERVER_PORT
+									3301
+									SERVER_PROTOCOL
+									HTTP/1.1
+									SERVER_SOFTWARE
+									WEBrick/1.3.1
+									(Ruby/2.1.0/2013-10-05)
+									rack.errors
+									#<Rack::Lint::ErrorWrapper:0x007f857bec38c8
+									@error=#<IO:<STDERR>>>
+									rack.input
+									#<Rack::Lint::InputWrapper:0x007f857bec3a80
+									@input=#<StringIO:0x007f857beda2a8>>
+									rack.multiprocess
+									false
+									rack.multithread
+									true
+									rack.request.cookie_hash
+									{}
+									rack.request.query_hash
+									{}
+									rack.request.query_string
+									rack.run_once
+									false
+									rack.url_scheme
+									http
+									rack.version
+									[1, 2]
+									You're
+									seeing
+    this error because you use Rack::ShowExceptions
+```
